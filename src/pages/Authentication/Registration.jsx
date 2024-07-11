@@ -1,4 +1,4 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import register from '../../assets/images/registration.jpg'
 import logo from "../../assets/images/logo.jpg";
 import { useContext, useState } from "react";
