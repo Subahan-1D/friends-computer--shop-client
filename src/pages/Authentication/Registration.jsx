@@ -1,11 +1,59 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import register from '../../assets/images/registration.jpg'
 import logo from "../../assets/images/logo.jpg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
+import { AuthContext } from "../../provider/AuthProvider";
 
 const Registration = () => {
-    const [showPassword,setShowPassword] = useState(false)
+  const navigate = useNavigate("/");
+  const [showPassword, setShowPassword] = useState(false);
+ const {
+   signInWithGoogle,
+   createUser,
+   setUser,
+   user,
+   loading,
+   updateUserProfile,
+ } = useContext(AuthContext);
+
+  // google sign in
+  const handleGoogleSignIn = async () => {
+    try {
+      const result = await signInWithGoogle();
+      console.log(result);
+      toast.success("Sign Up Successful");
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+      toast.error(err.message);
+    }
+  };
+
+  // email password register name update profile
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const name = from.name.value;
+    const photo = from.photo.value;
+    const email = from.email.value;
+    const password = from.password.value;
+    console.log({ name, photo, email, password });
+
+    try {
+      const result = await createUser(email, password);
+      await updateUserProfile(name, photo);
+      // optimistic UI Update
+      setUser({ ...result?.user, photoURL: photo, displayName: name });
+      navigate('/');
+      toast.success(" SignUp Successful");
+    } catch (err) {
+      console.log(err);
+      toast.error(err?.message);
+    }
+  };
+  if (user && loading) return;
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
@@ -18,7 +66,10 @@ const Registration = () => {
             Get Your Free Account Now.
           </p>
 
-          <div className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 ">
+          <div
+            onClick={handleGoogleSignIn}
+            className="flex cursor-pointer items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg   hover:bg-gray-50 "
+          >
             <div className="px-4 py-2">
               <svg className="w-6 h-6" viewBox="0 0 40 40">
                 <path
@@ -54,7 +105,7 @@ const Registration = () => {
 
             <span className="w-1/5 border-b dark:border-gray-400 lg:w-1/4"></span>
           </div>
-          <form>
+          <form onSubmit={handleRegister}>
             <div className="mt-4">
               <label
                 className="block mb-2 text-sm font-medium text-gray-600 "
