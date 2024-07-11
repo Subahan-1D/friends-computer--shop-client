@@ -7,15 +7,19 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-sm container px-4 mx-auto">
       <div className="flex-1">
-        <div className="flex gap-2 items-center">
+        <Link to='/' className="flex gap-2 items-center">
           <img className="w-auto h-7" src={logo} alt="" />
-          <span className="font-bold">FRIENDS COMPUTER SHOP</span>
-        </div>
+          <span className="font-bold text-xl">FRIENDS COMPUTER SHOP</span>
+        </Link>
       </div>
       <div className="flex-none">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 text-xl">
           <li>
             <Link to="/">Home</Link>
+          </li> 
+
+          <li>
+            <Link to="/queries">Queries</Link>
           </li>
 
           {/* conditional rendering */}
@@ -46,7 +50,7 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
             >
               <li>
-                <Link to="/my-queries">My Queries </Link>
+                <Link to="/my-queries">My Queries</Link>
               </li>
               <li>
                 <Link to="/my-recommendations">My recommendations</Link>
