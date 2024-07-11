@@ -1,14 +1,17 @@
+import { Link } from "react-router-dom";
+import register from '../../assets/images/registration.jpg'
+import logo from "../../assets/images/logo.jpg";
+import { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 const Registration = () => {
+    const [showPassword,setShowPassword] = useState(false)
   return (
-    <div className="flex justify-center items-center min-h-[calc(100vh-306px)]">
+    <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-lg  lg:max-w-4xl ">
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto">
-            <img
-              className="w-auto h-7 sm:h-8"
-              src="https://merakiui.com/images/logo.svg"
-              alt=""
-            />
+            <img className="w-auto h-7 sm:h-8" src={logo} alt="" />
           </div>
 
           <p className="mt-3 text-xl text-center text-gray-600 ">
@@ -97,24 +100,22 @@ const Registration = () => {
                 type="email"
               />
             </div>
-
-            <div className="mt-4">
-              <div className="flex justify-between">
-                <label
-                  className="block mb-2 text-sm font-medium text-gray-600 "
-                  htmlFor="loggingPassword"
-                >
-                  Password
-                </label>
-              </div>
-
+            <div className="relative mt-4">
               <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="password"
+                className="input input-bordered  block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
                 id="loggingPassword"
                 autoComplete="current-password"
-                name="password"
-                className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg    focus:border-blue-400 focus:ring-opacity-40  focus:outline-none focus:ring focus:ring-blue-300"
-                type="password"
+                required
               />
+              <span
+                className="absolute top-4 right-4"
+                onClick={() => setShowPassword(!showPassword)}
+              >
+                {showPassword ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+              </span>
             </div>
             <div className="mt-6">
               <button
@@ -133,7 +134,7 @@ const Registration = () => {
               to="/login"
               className="text-xs text-gray-500 uppercase  hover:underline"
             >
-              or sign in
+              <a className="link link-secondary">or sign in</a>
             </Link>
 
             <span className="w-1/5 border-b  md:w-1/4"></span>
@@ -142,7 +143,7 @@ const Registration = () => {
         <div
           className="hidden bg-cover bg-center lg:block lg:w-1/2"
           style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1606660265514-358ebbadc80d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1575&q=80')`,
+            backgroundImage: `url(${register})`,
           }}
         ></div>
       </div>
