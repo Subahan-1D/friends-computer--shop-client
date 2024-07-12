@@ -4,27 +4,33 @@ import ErrorPage from "./ErrorPage";
 import Home from "../pages/Home";
 import Login from "../pages/Authentication/Login";
 import Registration from "../pages/Authentication/Registration";
+import QueriesDetails from "../pages/QueriesDetails";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement:<ErrorPage></ErrorPage>,
-    children:[
-        {
-            index:true,
-            element:<Home></Home>
-        },
-        {
-            path:'/login',
-            element:<Login></Login>
-        },
-        {
-            path:'/registration',
-            element:<Registration></Registration>
-        }
-    ]
-    
+    errorElement: <ErrorPage></ErrorPage>,
+    children: [
+      {
+        index: true,
+        element: <Home></Home>,
+        loader: () => fetch(`${import.meta.env.VITE_API_URL}/serviceItem`),
+      },
+      {
+        path: "/login",
+        element: <Login></Login>,
+      },
+      {
+        path: "/registration",
+        element: <Registration></Registration>,
+      },
+      {
+        path: "/queries-details/:id",
+        element: <QueriesDetails></QueriesDetails>,
+        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
+      },
+    ],
   },
 ]);
 
