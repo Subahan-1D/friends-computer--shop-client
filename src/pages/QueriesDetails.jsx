@@ -75,7 +75,9 @@ const QueriesDetails = () => {
         </div>
 
         <div>
-          <p className="mt-2 text-lg text-gray-600 ">{query_Title}</p>
+          <p title={query_Title} className="mt-2 text-lg text-gray-600 ">
+            {query_Title.substring(0, 30)}...
+          </p>
           <h1 className="mt-2 text-3xl font-semibold text-gray-800 ">
             {product_Name}
           </h1>
