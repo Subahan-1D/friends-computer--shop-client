@@ -10,6 +10,8 @@ const QueriesCard = ({item}) => {
       brand_Name,
       product_Name,
       product_Image,
+      min_price,
+      max_price,
       user_Info: {
         name,
         thumbnail,
@@ -21,7 +23,7 @@ const QueriesCard = ({item}) => {
       <div className="card bg-white shadow-lg p-4">
         <img
           src={product_Image}
-          alt="not support"
+          alt="NOT FOUND"
           className="w-full h-40 object-cover"
         />
         <h3 className="text-xl mt-2">{query_Title}</h3>
@@ -36,17 +38,12 @@ const QueriesCard = ({item}) => {
           {alternation_Reason}
         </p>
         <p>
-          <strong>Date Posted:</strong> {date_Posted}
+          <strong>Date Posted:</strong>{" "}
+          {new Date(date_Posted).toLocaleDateString()}
         </p>
-        {/* <div className="user-info flex items-center mt-2">
-          <img
-            src={thumbnail}
-            alt=""
-            className="h-8 w-8 rounded-full mr-2"
-          />
-          <span>{name}</span>
-        </div> */}
-        {/* <button className="btn btn-secondary my-3">Add Product</button> */}
+        <p className="mt-2 text-sm font-bold text-gray-600 ">
+          Range: ${min_price} - ${max_price}
+        </p>
       </div>
     </Link>
   );

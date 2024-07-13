@@ -5,6 +5,9 @@ import Home from "../pages/Home";
 import Login from "../pages/Authentication/Login";
 import Registration from "../pages/Authentication/Registration";
 import QueriesDetails from "../pages/QueriesDetails";
+import MyQueries from "../components/MyQueries";
+import AddQueriesPage from "../pages/AddQueriesPage";
+import MyRecommendations from "../pages/MyRecommendations";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +31,20 @@ const router = createBrowserRouter([
       {
         path: "/queries-details/:id",
         element: <QueriesDetails></QueriesDetails>,
-        loader: ({params}) => fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
+      },
+      {
+        path: "/my-queries",
+        element: <MyQueries></MyQueries>,
+      },
+      {
+        path: "/add-queries-page",
+        element: <AddQueriesPage></AddQueriesPage>,
+      },
+      {
+        path: "/my-recommendations",
+        element:<MyRecommendations></MyRecommendations>,
       },
     ],
   },
