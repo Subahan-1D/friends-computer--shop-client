@@ -2,12 +2,13 @@ import React, { useContext, useState } from "react";
 import { useLoaderData, useNavigate } from "react-router-dom";
 import { AuthContext } from "../provider/AuthProvider";
 import DatePicker from "react-datepicker";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const Update = () => {
-  const [startDate, setStartDate] = useState(new Date());
   const navigate = useNavigate();
   const item = useLoaderData();
-  const { user } = useContext(AuthContext);
+
   const {
     _id,
     query_Title,
@@ -20,6 +21,38 @@ const Update = () => {
     max_price,
     user_Info,
   } = item || {};
+  const { user } = useContext(AuthContext);
+  const [startDate, setStartDate] = useState(new Date(date_Posted) || new Date());
+  const handleFromSubmission = async (e) => {
+    e.preventDefault();
+    const from = e.target;
+    const itemId = _id;
+    const product_Name = from.product_Name.value;
+    const product_Image = from.product_Image.value;
+    const deadline = startDate;
+    const email = user?.email;
+    const itemData = {
+      itemId,
+      product_Name,
+      product_Image,
+      email,
+      deadline,
+      user_Info,
+      min_price,
+      max_price,
+    };
+    try {
+      const { data } = await axios.put(
+        `${import.meta.env.VITE_API_URL}/item`,
+        itemData
+      );
+      console.log(data);
+      toast.success("Update Successful")
+    } catch (err) {
+      console.log(err.message);
+      toast.error(err.message)
+    }
+  };
   return (
     <div className="flex justify-center items-center min-h-[calc(100vh-306px)] my-12">
       <section className=" p-2 md:p-6 mx-auto bg-white rounded-md shadow-md ">
@@ -27,7 +60,7 @@ const Update = () => {
           Update a service product
         </h2>
 
-        <form>
+        <form onSubmit={handleFromSubmission}>
           <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
             <div>
               <label className="text-gray-700 " htmlFor="query_Title">
