@@ -9,6 +9,7 @@ import MyQueries from "../components/MyQueries";
 import AddQueriesPage from "../pages/AddQueriesPage";
 import MyRecommendations from "../pages/MyRecommendations";
 import RecomendedMe from "../pages/RecomendedMe";
+import Update from "../pages/Update";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +50,13 @@ const router = createBrowserRouter([
       },
       {
         path: "/recommendations-me",
-        element:<RecomendedMe></RecomendedMe>,
+        element: <RecomendedMe></RecomendedMe>,
+      },
+      {
+        path: "/update/:id",
+        element: <Update></Update>,
+        loader: ({ params }) =>
+          fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
       },
     ],
   },
