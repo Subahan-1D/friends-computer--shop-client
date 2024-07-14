@@ -42,7 +42,6 @@ const QueriesDetails = () => {
       product_Image,
       email,
       deadline,
-      user_Info,
       min_price,
       max_price
     };
