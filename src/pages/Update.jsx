@@ -26,30 +26,42 @@ const Update = () => {
   const handleFromSubmission = async (e) => {
     e.preventDefault();
     const from = e.target;
-    const itemId = _id;
+    const query_Title = from.query_Title.value;
     const product_Name = from.product_Name.value;
+    const brand_Name = from.brand_Name.value;
     const product_Image = from.product_Image.value;
-    const deadline = startDate;
     const email = user?.email;
+    const min_price = parseInt(from.min_price.value)
+    const max_price = parseInt(from.max_price.value)
+    const alternation_Reason = from.alternation_Reason.value;
+    const date_Posted = startDate;
     const itemData = {
-      itemId,
+      query_Title,
+      brand_Name,
       product_Name,
       product_Image,
       email,
-      deadline,
-      user_Info,
       min_price,
       max_price,
+      alternation_Reason,
+      date_Posted,
+      user_Info:{
+        email,
+        name:user?.displayName,
+        photo:user?.photoURL
+      }
     };
+    // console.log(itemData)
     try {
       const { data } = await axios.put(
-        `${import.meta.env.VITE_API_URL}/item`,
+        `${import.meta.env.VITE_API_URL}/item/${_id}`,
         itemData
       );
       console.log(data);
       toast.success("Update Successful")
+      navigate("/my-recommendations");
     } catch (err) {
-      console.log(err.message);
+      console.log(err);
       toast.error(err.message)
     }
   };

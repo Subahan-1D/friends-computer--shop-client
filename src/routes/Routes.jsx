@@ -10,6 +10,7 @@ import AddQueriesPage from "../pages/AddQueriesPage";
 import MyRecommendations from "../pages/MyRecommendations";
 import RecomendedMe from "../pages/RecomendedMe";
 import Update from "../pages/Update";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -32,29 +33,53 @@ const router = createBrowserRouter([
       },
       {
         path: "/queries-details/:id",
-        element: <QueriesDetails></QueriesDetails>,
+        element: (
+          <PrivateRoute>
+            <QueriesDetails></QueriesDetails>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
       },
       {
         path: "/my-queries",
-        element: <MyQueries></MyQueries>,
+        element: (
+          <PrivateRoute>
+            <MyQueries></MyQueries>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/add-queries-page",
-        element: <AddQueriesPage></AddQueriesPage>,
+        element: (
+          <PrivateRoute>
+            <AddQueriesPage></AddQueriesPage>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-recommendations",
-        element: <MyRecommendations></MyRecommendations>,
+        element: (
+          <PrivateRoute>
+            <MyRecommendations></MyRecommendations>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/recommendations-me",
-        element: <RecomendedMe></RecomendedMe>,
+        element: (
+          <PrivateRoute>
+            <RecomendedMe></RecomendedMe>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/update/:id",
-        element: <Update></Update>,
+        element: (
+          <PrivateRoute>
+            <Update></Update>
+          </PrivateRoute>
+        ),
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
       },

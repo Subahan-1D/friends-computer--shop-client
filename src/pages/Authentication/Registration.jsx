@@ -1,5 +1,5 @@
-import { Link, useNavigate } from "react-router-dom";
-import register from '../../assets/images/registration.jpg'
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import register from "../../assets/images/registration.jpg";
 import logo from "../../assets/images/logo.jpg";
 import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -8,15 +8,17 @@ import { AuthContext } from "../../provider/AuthProvider";
 
 const Registration = () => {
   const navigate = useNavigate("/");
+  const location = useLocation();
   const [showPassword, setShowPassword] = useState(false);
- const {
-   signInWithGoogle,
-   createUser,
-   setUser,
-   user,
-   loading,
-   updateUserProfile,
- } = useContext(AuthContext);
+  const from = location.state || "/";
+  const {
+    signInWithGoogle,
+    createUser,
+    setUser,
+    user,
+    loading,
+    updateUserProfile,
+  } = useContext(AuthContext);
 
   // google sign in
   const handleGoogleSignIn = async () => {
@@ -24,7 +26,7 @@ const Registration = () => {
       const result = await signInWithGoogle();
       console.log(result);
       toast.success("Sign Up Successful");
-      navigate("/");
+      navigate(from, { replace: true });
     } catch (err) {
       console.log(err);
       toast.error(err.message);
@@ -46,7 +48,7 @@ const Registration = () => {
       await updateUserProfile(name, photo);
       // optimistic UI Update
       setUser({ ...result?.user, photoURL: photo, displayName: name });
-      navigate('/');
+      navigate(from, { replace: true });
       toast.success(" SignUp Successful");
     } catch (err) {
       console.log(err);
