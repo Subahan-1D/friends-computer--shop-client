@@ -1,19 +1,19 @@
-import React, { useContext, useEffect, useState } from "react";
-import { AuthContext } from "../provider/AuthProvider";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CiViewBoard } from "react-icons/ci";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAuth from "../hooks/useAuth";
 
 const MyRecommendations = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [items, setItems] = useState([]);
   useEffect(() => {
     getItems();
   }, [user]);
    const getItems = async () => {
      const { data } = await axios(
-       `${import.meta.env.VITE_API_URL}/serviceItems/${user?.email}`
+       `${import.meta.env.VITE_API_URL}/serviceItems/${user?.email}`,{withCredentials:true}
      );
      setItems(data);
    };

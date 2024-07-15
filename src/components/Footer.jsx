@@ -7,7 +7,9 @@ const Footer = () => {
         <div className="flex flex-col items-center text-center">
           <div className="flex gap-2 items-center">
             <img className="w-auto h-7" src={logo} alt="" />
-            <span>FRIENDS COMPUTER SHOP</span>
+            <span className="text-gray-500">
+              FRIENDS COMPUTER SHOP
+            </span>
           </div>
 
           <div className="flex flex-wrap justify-center mt-6 -mx-4">

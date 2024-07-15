@@ -5,6 +5,7 @@ import { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import toast from "react-hot-toast";
 import { AuthContext } from "../../provider/AuthProvider";
+import axios from "axios";
 
 const Registration = () => {
   const navigate = useNavigate("/");
@@ -24,7 +25,15 @@ const Registration = () => {
   const handleGoogleSignIn = async () => {
     try {
       const result = await signInWithGoogle();
-      console.log(result);
+        console.log(result.user);
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: result?.user?.email,
+          },
+          { withCredentials: true }
+        );
+        console.log(data);
       toast.success("Sign Up Successful");
       navigate(from, { replace: true });
     } catch (err) {
@@ -48,6 +57,15 @@ const Registration = () => {
       await updateUserProfile(name, photo);
       // optimistic UI Update
       setUser({ ...result?.user, photoURL: photo, displayName: name });
+        console.log(result.user);
+        const { data } = await axios.post(
+          `${import.meta.env.VITE_API_URL}/jwt`,
+          {
+            email: result?.user?.email,
+          },
+          { withCredentials: true }
+        );
+        console.log(data);
       navigate(from, { replace: true });
       toast.success(" SignUp Successful");
     } catch (err) {

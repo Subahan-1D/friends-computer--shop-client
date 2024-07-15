@@ -8,7 +8,7 @@ const Home = () => {
   return (
     <div>
       <Carousel></Carousel>
-      <RecentQueries serviceItem={serviceItem}></RecentQueries>
+      <RecentQueries></RecentQueries>
     </div>
   );
 };

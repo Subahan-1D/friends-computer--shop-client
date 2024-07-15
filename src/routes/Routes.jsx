@@ -11,6 +11,7 @@ import MyRecommendations from "../pages/MyRecommendations";
 import RecomendedMe from "../pages/RecomendedMe";
 import Update from "../pages/Update";
 import PrivateRoute from "./PrivateRoute";
+import Queries from "../pages/Queries";
 
 const router = createBrowserRouter([
   {
@@ -20,8 +21,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Home></Home>,
-        loader: () => fetch(`${import.meta.env.VITE_API_URL}/serviceItem`),
+        element: <Home></Home>
       },
       {
         path: "/login",
@@ -83,6 +83,11 @@ const router = createBrowserRouter([
         loader: ({ params }) =>
           fetch(`${import.meta.env.VITE_API_URL}/item/${params.id}`),
       },
+      {
+        path:'/queries',
+        element:<Queries></Queries>
+      }
+
     ],
   },
 ]);

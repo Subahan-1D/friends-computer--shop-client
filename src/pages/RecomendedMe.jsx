@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../provider/AuthProvider";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const RecomendedMe = () => {
-  const { user } = useContext(AuthContext);
+  const { user } = useAuth();
   const [bids, setBids] = useState([]);
   useEffect(() => {
     getItems();
