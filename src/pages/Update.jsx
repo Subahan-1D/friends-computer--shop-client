@@ -56,7 +56,7 @@ const Update = () => {
     // console.log(itemData)
     try {
       const { data } = await axios.put(
-        `${import.meta.env.VITE_API_URL}/item/${_id}`,
+        `${import.meta.env.VITE_API_URL}/item/${_id}`,{withCredentials:true},
         itemData
       );
       console.log(data);
