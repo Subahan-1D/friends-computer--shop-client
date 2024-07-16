@@ -41,7 +41,7 @@ const AddQueriesPage = () => {
     try {
       const { data } = await axios.post(
         `${import.meta.env.VITE_API_URL}/query`,
-        queryData
+        queryData,{withCredentials:true}
       );
       console.log(data);
       toast.success("item add data successful");

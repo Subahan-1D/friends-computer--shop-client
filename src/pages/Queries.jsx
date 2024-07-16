@@ -16,7 +16,7 @@ const Queries = () => {
       const { data } = await axios(
         `${
           import.meta.env.VITE_API_URL
-        }/all-item?page=${currentPage}&size=${itemsPerPage}&sort=${sort}&search=${search}`
+        }/all-item?page=${currentPage}&size=${itemsPerPage}&sort=${sort}&search=${search}`,{withCredentials:true}
       );
       setJobs(data);
     };
@@ -26,7 +26,7 @@ const Queries = () => {
   useEffect(() => {
     const getCount = async () => {
       const { data } = await axios(
-        `${import.meta.env.VITE_API_URL}/item-count?search=${search}`
+        `${import.meta.env.VITE_API_URL}/item-count?search=${search}`,{withCredentials:true}
       );
       setCount(data.count);
     };

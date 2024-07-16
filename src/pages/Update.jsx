@@ -22,7 +22,9 @@ const Update = () => {
     user_Info,
   } = item || {};
   const { user } = useContext(AuthContext);
-  const [startDate, setStartDate] = useState(new Date(date_Posted) || new Date());
+  const [startDate, setStartDate] = useState(
+    new Date(date_Posted) || new Date()
+  );
   const handleFromSubmission = async (e) => {
     e.preventDefault();
     const from = e.target;
@@ -31,8 +33,8 @@ const Update = () => {
     const brand_Name = from.brand_Name.value;
     const product_Image = from.product_Image.value;
     const email = user?.email;
-    const min_price = parseInt(from.min_price.value)
-    const max_price = parseInt(from.max_price.value)
+    const min_price = parseInt(from.min_price.value);
+    const max_price = parseInt(from.max_price.value);
     const alternation_Reason = from.alternation_Reason.value;
     const date_Posted = startDate;
     const itemData = {
@@ -45,11 +47,11 @@ const Update = () => {
       max_price,
       alternation_Reason,
       date_Posted,
-      user_Info:{
+      user_Info: {
         email,
-        name:user?.displayName,
-        photo:user?.photoURL
-      }
+        name: user?.displayName,
+        photo: user?.photoURL,
+      },
     };
     // console.log(itemData)
     try {
@@ -58,11 +60,11 @@ const Update = () => {
         itemData
       );
       console.log(data);
-      toast.success("Update Successful")
+      toast.success("Update Successful");
       navigate("/my-recommendations");
     } catch (err) {
       console.log(err);
-      toast.error(err.message)
+      toast.error(err.message);
     }
   };
   return (

@@ -26,13 +26,13 @@ const QueriesDetails = () => {
 
   const handleFromSubmission = async (e) => {
     e.preventDefault();
-     if (user?.email === user_Info?.email)
-       return toast.error("Action not permitted");
+    if (user?.email === user_Info?.email)
+      return toast.error("Action not permitted");
     const from = e.target;
     const itemId = _id;
     const price = parseFloat(from.price.value);
-     if (price < parseFloat(min_price))
-       return toast.error("Offer more or at least equal to minimum price");
+    if (price < parseFloat(min_price))
+      return toast.error("Offer more or at least equal to minimum price");
     const product_Name = from.product_Name.value;
     const product_Image = from.product_Image.value;
     const deadline = startDate;
@@ -48,13 +48,17 @@ const QueriesDetails = () => {
       recommendation_Count,
     };
     try {
-      const { data } = await axios.post( `${import.meta.env.VITE_API_URL}/item`,itemData);
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_API_URL}/item`,itemData,
+        { withCredentials: true }
+      );
       console.log(data);
-      toast.success("Added by Successfully")
+      toast.success("Added by Successfully");
     } catch (err) {
-      toast.success(err.response.data)
+      toast.success(err.response.data);
     }
   };
+ 
   return (
     <div className="flex flex-col md:flex-row justify-around gap-5  items-center min-h-[calc(100vh-306px)] md:max-w-screen-xl mx-auto my-12">
       {/* Job Details */}
@@ -126,6 +130,7 @@ const QueriesDetails = () => {
                 id="name"
                 type="text"
                 name="product_Name"
+                required
                 className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md   focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring"
               />
             </div>

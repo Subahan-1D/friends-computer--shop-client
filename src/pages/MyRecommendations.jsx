@@ -11,26 +11,29 @@ const MyRecommendations = () => {
   useEffect(() => {
     getItems();
   }, [user]);
-   const getItems = async () => {
-     const { data } = await axios(
-       `${import.meta.env.VITE_API_URL}/serviceItems/${user?.email}`,{withCredentials:true}
-     );
-     setItems(data);
-   };
-//   console.log(items)
-const handleDelete = async (id) => {
-  try {
-    const { data } = await axios.delete(`${import.meta.env.VITE_API_URL}/item/${id}`);
-    console.log(data);
-    toast.success("Delete Successful");
+  const getItems = async () => {
+    const { data } = await axios(
+      `${import.meta.env.VITE_API_URL}/serviceItems/${user?.email}`,
+      { withCredentials: true }
+    );
+    setItems(data);
+  };
+  //   console.log(items)
+  const handleDelete = async (id) => {
+    try {
+      const { data } = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/item/${id}`,{withCredentials:true}
+      );
+      console.log(data);
+      toast.success("Delete Successful");
 
-    //refresh ui
-    getItems()
-  } catch (err) {
-    console.log(err.message);
-    toast.error(err.message);
-  }
-};
+      //refresh ui
+      getItems();
+    } catch (err) {
+      console.log(err.message);
+      toast.error(err.message);
+    }
+  };
 
   return (
     <section className="container px-4 mx-auto pt-12">
@@ -132,7 +135,10 @@ const handleDelete = async (id) => {
                             </Link>
                           </button>
 
-                          <Link to={`/update/${item._id}`}  className="text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none">
+                          <Link
+                            to={`/update/${item._id}`}
+                            className="text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none"
+                          >
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               fill="none"

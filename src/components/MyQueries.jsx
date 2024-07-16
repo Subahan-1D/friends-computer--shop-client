@@ -1,4 +1,4 @@
-import React from 'react';
+
 import AddQueriesPage from '../pages/AddQueriesPage';
 import AddQueriesBanner from './AddQueriesBanner';
 
