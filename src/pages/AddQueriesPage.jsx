@@ -36,6 +36,7 @@ const AddQueriesPage = () => {
         name: user?.displayName,
         thumbnail: user?.photoURL,
       },
+      recommendation_Count: 0 ,
     };
     try {
       const { data } = await axios.post(

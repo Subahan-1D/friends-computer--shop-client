@@ -12,6 +12,7 @@ const QueriesCard = ({item}) => {
       product_Image,
       min_price,
       max_price,
+      recommendation_Count ,
       user_Info: {
         name,
         thumbnail,
@@ -42,8 +43,11 @@ const QueriesCard = ({item}) => {
           {new Date(date_Posted).toLocaleDateString()}
         </p>
         <p className="mt-2 text-sm font-bold text-gray-600 ">
-          Range: ${min_price} - ${max_price}
+          <strong>Price : </strong> ${min_price} - ${max_price}
         </p>
+        <h3 className="text-xl mt-2">
+          <strong>RecommendationCount :</strong> {recommendation_Count}
+        </h3>
       </div>
     </Link>
   );

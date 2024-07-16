@@ -21,6 +21,7 @@ const QueriesDetails = () => {
     min_price,
     max_price,
     user_Info,
+    recommendation_Count,
   } = item || {};
 
   const handleFromSubmission = async (e) => {
@@ -43,7 +44,8 @@ const QueriesDetails = () => {
       email,
       deadline,
       min_price,
-      max_price
+      max_price,
+      recommendation_Count,
     };
     try {
       const { data } = await axios.post( `${import.meta.env.VITE_API_URL}/item`,itemData);
@@ -79,13 +81,10 @@ const QueriesDetails = () => {
           <p title={query_Title} className="mt-2 text-lg text-gray-600 ">
             {query_Title.substring(0, 30)}...
           </p>
-          <h1 className="mt-2 text-lg  text-red-500 ">
-            {alternation_Reason}
-          </h1>
+          <h1 className="mt-2 text-lg  text-red-500 ">{alternation_Reason}</h1>
           <h1 className="mt-2 text-3xl font-semibold text-gray-800 ">
             {product_Name}
           </h1>
-
 
           <p className="mt-6 text-sm font-bold text-gray-600 ">
             Boycotting Reason Details :
@@ -106,6 +105,9 @@ const QueriesDetails = () => {
           <p className="mt-6 text-lg font-bold text-gray-600 ">
             Range: ${min_price} - ${max_price}
           </p>
+          <h1 className="mt-2 text-3xl font-semibold text-gray-800 ">
+            Recommendation_Count : {recommendation_Count}
+          </h1>
         </div>
       </div>
       {/* Place A Queries */}
