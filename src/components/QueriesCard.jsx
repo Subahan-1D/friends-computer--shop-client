@@ -1,25 +1,21 @@
 import { Link } from "react-router-dom";
 
-
-const QueriesCard = ({item}) => {
-    const {
-        _id,
-      query_Title,
-      date_Posted,
-      alternation_Reason,
-      brand_Name,
-      product_Name,
-      product_Image,
-      min_price,
-      max_price,
-      recommendation_Count ,
-    } = item || {};
+const QueriesCard = ({ item }) => {
+  const {
+    _id,
+    query_Title,
+    date_Posted,
+    alternation_Reason,
+    brand_Name,
+    product_Name,
+    product_Image,
+    min_price,
+    max_price,
+    recommendation_Count,
+  } = item || {};
 
   return (
-    <Link
-      to={(`/queries-details/${_id}`)}
-      className="recent-queries "
-    >
+    <Link to={`/queries-details/${_id}`} className="recent-queries ">
       <div className="card bg-white shadow-lg p-4">
         <img
           src={product_Image}

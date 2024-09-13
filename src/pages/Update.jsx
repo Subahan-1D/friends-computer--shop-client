@@ -53,11 +53,11 @@ const Update = () => {
         photo: user?.photoURL,
       },
     };
-    // console.log(itemData)
+    console.log(itemData)
     try {
       const { data } = await axios.put(
-        `${import.meta.env.VITE_API_URL}/item/${_id}`,{withCredentials:true},
-        itemData
+        `${import.meta.env.VITE_API_URL}/item/${_id}`,itemData,{withCredentials:true},
+        
       );
       console.log(data);
       toast.success("Update Successful");
